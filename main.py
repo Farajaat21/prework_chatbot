@@ -1,8 +1,8 @@
-class Chatbot:
-    def __init__ (self):
-        self.user_name = None
-        self.order_number = None
-        def welcome(self, user_name):
+class OnlineShop_ChatBot:
+    def __init__ (self, user_name):
+        self.user_name = user_name
+        #self.order_number = order_numer
+        def welcome(self):
             print(f'\nHello {self.user_name}, welcome to our AI Customer Service!')
             print("I'm here to assist you with any issues related to our products or services.")
             print("Let’s get started by choosing what you need help with.\n")
@@ -20,7 +20,7 @@ class Chatbot:
  
 def main():
      name = True
-     chatbot = chatbot()
+     chatbot = OnlineShop_ChatBot()
      while name:  
         user_name = input("ENTER USERNAME: ").strip()
         if user_name == "":
