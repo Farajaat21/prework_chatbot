@@ -1,4 +1,4 @@
-from nrclex import NRCLex
+#from nrclex import NRCLex
 class OnlineShop_ChatBot:
     def __init__ (self, user_name, order_number):
         self.user_name = user_name
@@ -25,7 +25,7 @@ class OnlineShop_ChatBot:
                 for choices in user_choices:
                     print(choices)
                 
-                user_choice = input("Choose your complaint")
+                user_choice = input("Choose your complaint ")
                 if user_choice == "1":
                     print("You selected: Return item")
                     print("please ship the item back at your local usps to start the refund and returning process")
@@ -44,10 +44,12 @@ class OnlineShop_ChatBot:
                     print("You selected: Track my order")
                     print("----------------------------------------------------------") 
                     print("Your order in currecnt in china")
+                    break
                 elif user_choice == "5":
                     print("You selected: Ask about product details")
-                    questionAked = input("ENTER YOUR QUESTION") 
+                    questionAked = input("ENTER YOUR QUESTION ") 
                     print("if your expericening any issues with our product please watch a Youtube video on how to fix it.")
+                    break
             except ValueError:
                 print("----------------------------------------------------------")
                 print("Invalide input. Please choose from options 1 to num")
@@ -55,21 +57,36 @@ class OnlineShop_ChatBot:
         print("----------------------------------------------------------")
         print(f'\nLastly, {self.user_name}, can you rate your experience with us?')
         
-        user_experience = input("Type in your expericence")
-        emotion = NRCLex(user_experience)
-        emotions = emotion.top_emotions
+        
+        while True:
+            try:
+                user_experience = int(input("Type in your experience from 1 to 5: "))
+                if user_experience < 2:
+                    print("We are sorry for the negative experience")
+                elif user_experience < 4:
+                    print("Thank you for your feedback. We'll try to improve.")
+                elif user_experience <= 5:
+                    print("Thank you for the positive feedback!")
+                else:
+                    print("Invalid rating. Please enter a number between 1 and 5.")
+                break 
+            except ValueError:
+                print("Please enter a number from 1 to 5.") 
+        
+        #emotion = NRCLex(user_experience)
+        #emotions = emotion.top_emotions
             
-        if emotions:
-            returned_emotion = emotions[0][0]
-            print(f"Your experience was {returned_emotion}")
-            if returned_emotion in ["joy", "trust", "anticipation"]:
-                print("Thank you for the positive feedback")
-            elif returned_emotion in ["anger", "fear", "sadness"]:
-                print("we are soory for the negative experince")
-            else:
-                print("thank you we'll try to improve")
-        else:
-            print(f"Thank you for your feedback.\n have a nice day")
+        #if emotions:
+            #returned_emotion = emotions[0][0]
+            #print(f"Your experience was {returned_emotion}")
+            #if returned_emotion in ["joy", "trust", "anticipation"]:
+                #print("Thank you for the positive feedback")
+            #elif returned_emotion in ["anger", "fear", "sadness"]:
+                #print("we are soory for the negative experince")
+            #else:
+                #print("thank you we'll try to improve")
+        #else:
+            #print(f"Thank you for your feedback.\n have a nice day")
 
         
         
@@ -93,3 +110,5 @@ def main():
             chatbot.welcome()
             chatbot.get_user_choices()
             chatbot.user_rated_experience()
+if __name__ == "__main__":
+    main()
